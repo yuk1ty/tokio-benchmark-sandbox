@@ -62,7 +62,7 @@ fn respond(req: Request<()>)
     let body = match req.uri().path() {
         "/ok" => {
             ret.header("Content-Type", "text/plain");
-            let sleeping_millis = std::time::Duration::from_millis(500);
+            let sleeping_millis = std::time::Duration::from_millis(5000);
             thread::sleep(sleeping_millis);
             "OK".to_string()
         }
