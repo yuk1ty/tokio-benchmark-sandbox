@@ -10,6 +10,7 @@ extern crate time;
 extern crate tokio;
 
 use std::{env, fmt, io};
+use std::thread;
 use std::net::SocketAddr;
 
 use tokio::net::{TcpStream, TcpListener};
@@ -61,6 +62,8 @@ fn respond(req: Request<()>)
     let body = match req.uri().path() {
         "/ok" => {
             ret.header("Content-Type", "text/plain");
+            let sleeping_millis = std::time::Duration::from_millis(5000);
+            thread::sleep(sleeping_millis);
             "OK".to_string()
         }
         "/json" => {
